@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - Shadow Mods | Premium Mods Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+            --light: #ffffff;
+            --dark: #2b2d42;
+            --gray: #edf2f4;
+            --gray-dark: #8d99ae;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            perspective: 1000px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(67, 97, 238, 0.2);
+            transform-style: preserve-3d;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            transform: translateZ(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: translateZ(30px) scale(1.05);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            padding: 10px 15px 10px 45px;
+            color: var(--dark);
+            width: 220px;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 0 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        .search-box input:focus {
+            width: 260px;
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(247, 37, 133, 0.3);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            transform: translateZ(0);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateZ(20px) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.6);
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        /* Learn More Hero Section */
+        .learn-hero {
+            padding: 180px 0 80px;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            text-align: center;
+        }
+        
+        .learn-hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateZ(30px);
+        }
+        
+        .learn-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--dark);
+            transform: translateZ(20px);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            transform: translateZ(20px);
+        }
+        
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(247, 37, 133, 0.5);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+            text-align: center;
+        }
+        
+        .info-card:hover {
+            transform: translateZ(30px) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            transform: translateZ(20px);
+        }
+        
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            transform: translateZ(15px);
+        }
+        
+        .info-card p {
+            color: var(--dark);
+            transform: translateZ(10px);
+        }
+        
+        /* How It Works Section */
+        .process-steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: 250px;
+            text-align: center;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        
+        .step:hover {
+            transform: translateZ(30px) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            transform: translateZ(20px);
+        }
+        
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            transform: translateZ(15px);
+        }
+        
+        .step p {
+            color: var(--dark);
+            transform: translateZ(10px);
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            transform: translateZ(15px);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateZ(10px);
+        }
+        
+        .contact-details i {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-form {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(67, 97, 238, 0.2);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            transform: translateZ(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--dark);
+        }
+        
+        /* 3D Background Elements */
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(25px);
+            transform-style: preserve-3d;
+            z-index: -1;
+        }
+        
+        .bg-1 {
+            width: 600px;
+            height: 600px;
+            top: -300px;
+            right: -300px;
+            animation: pulse 15s infinite alternate;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        }
+        
+        .bg-2 {
+            width: 500px;
+            height: 500px;
+            bottom: -250px;
+            left: -250px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            animation: pulse 12s infinite alternate-reverse;
+        }
+        
+        .bg-3 {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 30%;
+            background: radial-gradient(circle, var(--warning) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 20px;
+            transform-style: preserve-3d;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(5px);
+        }
+        
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            background: var(--primary);
+            animation: float-shape 20s infinite linear;
+            box-shadow: 0 0 50px rgba(67, 97, 238, 0.5);
+        }
+        
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 30%;
+            right: 15%;
+            background: var(--accent);
+            animation: float-shape 25s infinite linear reverse;
+            box-shadow: 0 0 50px rgba(247, 37, 133, 0.5);
+        }
+        
+        .shape-3 {
+            width: 120px;
+            height: 120px;
+            top: 40%;
+            right: 25%;
+            background: var(--warning);
+            animation: float-shape 30s infinite linear;
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 186, 8, 0.5);
+        }
+        
+        @keyframes float-shape {
+            0% {
+                transform: translateY(0) rotate(0deg) translateZ(0);
+            }
+            25% {
+                transform: translateY(-50px) rotate(90deg) translateZ(50px);
+            }
+            50% {
+                transform: translateY(0) rotate(180deg) translateZ(100px);
+            }
+            75% {
+                transform: translateY(50px) rotate(270deg) translateZ(50px);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg) translateZ(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translateZ(0) scale(1);
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateZ(50px) scale(1.2);
+                opacity: 0.2;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .learn-hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .header-actions {
+                gap: 10px;
+            }
+            
+            .search-box input {
+                width: 150px;
+            }
+            
+            .search-box input:focus {
+                width: 180px;
+            }
+            
+            .learn-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 22px;
+            }
+            
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .learn-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .learn-hero p {
+                font-size: 1rem;
+            }
+            
+            .info-card, .step, .contact-info, .contact-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3"></div>
+    
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-cube"></i>
+                Shadow<span>Mods</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search mods...">
+                </div>
+                <a href="#" class="btn"><i class="fas fa-shopping-cart"></i> Cart (0)</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Learn More Hero Section -->
+    <section class="learn-hero">
+        <div class="container">
+            <h1>About Shadow Mods</h1>
+            <p>Learn more about our platform, how it works, and how we're revolutionizing the modding community with premium content and a seamless experience.</p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>What is Shadow Mods?</h2>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Premium Marketplace</h3>
+                    <p>Shadow Mods is a curated marketplace for high-quality game modifications, assets, and digital content. We connect talented creators with passionate gamers.</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safe & Secure</h3>
+                    <p>All mods on our platform are thoroughly vetted for quality and security. We ensure that every download is malware-free and performs as advertised.</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Driven</h3>
+                    <p>We foster a vibrant community of modders and gamers where feedback is encouraged, and creators are fairly compensated for their work.</p>
+                </div>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI-Powered Recommendations</h3>
+                    <p>Our advanced algorithm suggests mods based on your preferences, gaming history, and compatibility with your existing mod collection.</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>One-Click Installation</h3>
+                    <p>Our proprietary mod manager makes installing, updating, and managing mods effortless with just a single click.</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-sync"></i>
+                    <h3>Auto Updates</h3>
+                    <p>Never worry about outdated mods again. Our system automatically updates your mods when new versions are released.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="content-section" style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(237, 242, 244, 0.9));">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+            </div>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Browse</h3>
+                    <p>Explore our extensive catalog of premium mods, filters, and assets for your favorite games.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Purchase</h3>
+                    <p>Select the mods you want and complete your purchase through our secure payment system.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download</h3>
+                    <p>Access your purchased mods instantly through our desktop app or directly from the website.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Enjoy</h3>
+                    <p>Enhance your gaming experience with high-quality mods that work seamlessly together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Creators Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>For Content Creators</h2>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Earn Revenue</h3>
+                    <p>Monetize your skills and creativity. We offer one of the highest revenue shares in the industry.</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Powerful Tools</h3>
+                    <p>Access our suite of developer tools to create, test, and publish mods more efficiently.</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Track your mod's performance, downloads, and revenue with our comprehensive analytics.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn">Become a Creator</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section" style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(237, 242, 244, 0.9));">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What games are supported on Shadow Mods? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We support all major PC games that allow modding, including Skyrim, Fallout 4, Minecraft, GTA V, Stardew Valley, and many more. Our catalog is continuously expanding based on community demand.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I install mods? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You can install mods manually by downloading and following included instructions, or use our Shadow Mod Manager for automatic one-click installation and updates.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What payment methods do you accept? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We accept all major credit cards, PayPal, and cryptocurrency. All transactions are secure and encrypted.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I request a refund? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer a 14-day refund policy if a mod doesn't work as described or causes compatibility issues with your game.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I become a content creator? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Simply sign up for a creator account, verify your identity, and submit your first mod for review. Our team will guide you through the process.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    
+                    <div class="contact-details">
+                        <p>
+                            <i class="fas fa-envelope"></i>
+                            <span>devilkiler4279@gmail.com</span>
+                        </p>
+                        <p>
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </p>
+                        <p>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Mod Street, Digital City, DC 10101</span>
+                        </p>
+                    </div>
+                    
+                    <div class="social-links" style="justify-content: flex-start;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" placeholder="What is this regarding?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Type your message here"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shadow Mods</h3>
+                    <p>Your premier destination for premium mods and digital content. Quality guaranteed.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">New Releases</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new products and special offers.</p>
+                    <form>
+                        <input type="email" placeholder="Your email address" style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 2px solid var(--primary); background: rgba(255,255,255,0.5); color: var(--dark);">
+                        <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Shadow Mods. All rights reserved.</p>
+                <p class="designer-credit">Designed by Abhinit Kumar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced 3D animations and effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const infoCards = document.querySelectorAll('.info-card');
+            const steps = document.querySelectorAll('.step');
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            const shapes = document.querySelectorAll('.floating-shape');
+            
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            infoCards.forEach(card => {
+                card.style.opacity = '0';
+                observer.observe(card);
+            });
+            
+            steps.forEach(step => {
+                step.style.opacity = '0';
+                observer.observe(step);
+            });
+            
+            // FAQ toggle functionality
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    } else {
+                        answer.style.display = 'block';
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                });
+            });
+            
+            // Parallax effect for background elements
+            window.addEventListener('mousemove', function(e) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                const bg1 = document.querySelector('.bg-1');
+                const bg2 = document.querySelector('.bg-2');
+                const bg3 = document.querySelector('.bg-3');
+                
+                bg1.style.transform = `translateX(${x * 30}px) translateY(${y * 30}px) translateZ(0)`;
+                bg2.style.transform = `translateX(${-x * 40}px) translateY(${-y * 40}px) translateZ(0)`;
+                bg3.style.transform = `translateX(${x * 50}px) translateY(${y * 50}px) translateZ(0)`;
+                
+                // Move shapes with mouse
+                shapes.forEach((shape, index) => {
+                    const speed = 0.01 + (index * 0.01);
+                    shape.style.transform = `translateX(${x * 100 * speed}px) translateY(${y * 100 * speed}px) rotate(${x * 100}deg) translateZ(0)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
