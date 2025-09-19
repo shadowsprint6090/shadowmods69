@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore - Shadow Mods | Premium Mods Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+            --light: #ffffff;
+            --dark: #2b2d42;
+            --gray: #edf2f4;
+            --gray-dark: #8d99ae;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            perspective: 1000px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(67, 97, 238, 0.2);
+            transform-style: preserve-3d;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            transform: translateZ(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: translateZ(30px) scale(1.05);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            padding: 10px 15px 10px 45px;
+            color: var(--dark);
+            width: 220px;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            box-shadow: 0 0 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        .search-box input:focus {
+            width: 260px;
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(247, 37, 133, 0.3);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            transform: translateZ(0);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateZ(20px) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.6);
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        /* Explore Hero Section */
+        .explore-hero {
+            padding: 160px 0 60px;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            text-align: center;
+        }
+        
+        .explore-hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateZ(30px);
+        }
+        
+        .explore-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--dark);
+            transform: translateZ(20px);
+        }
+        
+        /* Filters Section */
+        .filters-section {
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(67, 97, 238, 0.2);
+            position: sticky;
+            top: 80px;
+            z-index: 900;
+            transform-style: preserve-3d;
+        }
+        
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .filter-select {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(247, 37, 133, 0.3);
+            transform: translateZ(10px);
+        }
+        
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+        
+        .filter-tag:hover {
+            transform: translateZ(10px) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .filter-tag.active {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--warning) 100%);
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .view-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+        
+        .view-btn.active, .view-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateZ(10px);
+        }
+        
+        /* Products Grid */
+        .products-section {
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            transform: translateZ(20px);
+        }
+        
+        .products-count {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .sort-select {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+        
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(247, 37, 133, 0.3);
+            transform: translateZ(10px);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        
+        .product-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateZ(30px) translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-card:hover:before {
+            opacity: 1;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 15px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--accent), var(--warning));
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+            transform: translateZ(20px);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1) rotateZ(2deg);
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-category {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .product-info p {
+            color: var(--gray-dark);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .product-rating {
+            color: var(--warning);
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .product-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+        
+        .cart-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .details-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .product-btn:hover {
+            transform: translateZ(10px) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 60px;
+            transform: translateZ(20px);
+        }
+        
+        .page-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+        
+        .page-btn.active, .page-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            transform: translateZ(10px);
+        }
+        
+        /* 3D Background Elements */
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(25px);
+            transform-style: preserve-3d;
+            z-index: -1;
+        }
+        
+        .bg-1 {
+            width: 600px;
+            height: 600px;
+            top: -300px;
+            right: -300px;
+            animation: pulse 15s infinite alternate;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        }
+        
+        .bg-2 {
+            width: 500px;
+            height: 500px;
+            bottom: -250px;
+            left: -250px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            animation: pulse 12s infinite alternate-reverse;
+        }
+        
+        .bg-3 {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 30%;
+            background: radial-gradient(circle, var(--warning) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 20px;
+            transform-style: preserve-3d;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(5px);
+        }
+        
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            background: var(--primary);
+            animation: float-shape 20s infinite linear;
+            box-shadow: 0 0 50px rgba(67, 97, 238, 0.5);
+        }
+        
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 30%;
+            right: 15%;
+            background: var(--accent);
+            animation: float-shape 25s infinite linear reverse;
+            box-shadow: 0 0 50px rgba(247, 37, 133, 0.5);
+        }
+        
+        .shape-3 {
+            width: 120px;
+            height: 120px;
+            top: 40%;
+            right: 25%;
+            background: var(--warning);
+            animation: float-shape 30s infinite linear;
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 186, 8, 0.5);
+        }
+        
+        @keyframes float-shape {
+            0% {
+                transform: translateY(0) rotate(0deg) translateZ(0);
+            }
+            25% {
+                transform: translateY(-50px) rotate(90deg) translateZ(50px);
+            }
+            50% {
+                transform: translateY(0) rotate(180deg) translateZ(100px);
+            }
+            75% {
+                transform: translateY(50px) rotate(270deg) translateZ(50px);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg) translateZ(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translateZ(0) scale(1);
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateZ(50px) scale(1.2);
+                opacity: 0.2;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .filters-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .header-actions {
+                gap: 10px;
+            }
+            
+            .search-box input {
+                width: 150px;
+            }
+            
+            .search-box input:focus {
+                width: 180px;
+            }
+            
+            .explore-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .filter-group {
+                flex-wrap: wrap;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 22px;
+            }
+            
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .explore-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .explore-hero p {
+                font-size: 1rem;
+            }
+            
+            .filter-select, .sort-select {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Background Elements -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3"></div>
+    
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-cube"></i>
+                Shadow<span>Mods</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" style="color: var(--primary);">Explore</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search mods...">
+                </div>
+                <a href="#" class="btn"><i class="fas fa-shopping-cart"></i> Cart (3)</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Explore Hero Section -->
+    <section class="explore-hero">
+        <div class="container">
+            <h1>Explore Our Mod Collection</h1>
+            <p>Discover thousands of premium mods, assets, and digital content to enhance your gaming experience.</p>
+            <a href="#products" class="btn">Browse All Mods</a>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <span class="filter-label">Categories:</span>
+                    <select class="filter-select">
+                        <option>All Categories</option>
+                        <option>Game Mods</option>
+                        <option>Textures</option>
+                        <option>Characters</option>
+                        <option>Visual Effects</option>
+                        <option>UI Packs</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">Price Range:</span>
+                    <select class="filter-select">
+                        <option>Any Price</option>
+                        <option>Under $10</option>
+                        <option>$10 - $25</option>
+                        <option>$25 - $50</option>
+                        <option>Over $50</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">Tags:</span>
+                    <div class="filter-tags">
+                        <div class="filter-tag">Popular</div>
+                        <div class="filter-tag active">New</div>
+                        <div class="filter-tag">Sale</div>
+                        <div class="filter-tag">VR</div>
+                    </div>
+                </div>
+                
+                <div class="view-options">
+                    <div class="view-btn active"><i class="fas fa-th"></i></div>
+                    <div class="view-btn"><i class="fas fa-list"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="products-header">
+                <div class="products-count">Showing 12 of 248 products</div>
+                <select class="sort-select">
+                    <option>Sort by: Popularity</option>
+                    <option>Sort by: Newest</option>
+                    <option>Sort by: Price: Low to High</option>
+                    <option>Sort by: Price: High to Low</option>
+                    <option>Sort by: Rating</option>
+                </select>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Cyberpunk Mod">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">UI Packs</div>
+                        <h3>Cyberpunk UI Pack</h3>
+                        <p>Complete UI overhaul with cyberpunk theme, including HUD, menus, and icons.</p>
+                        <div class="product-meta">
+                            <div class="product-price">$24.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <div class="product-btn cart-btn">Add to Cart</div>
+                            <div class="product-btn details-btn">Details</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-badge">SALE</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Fantasy Mod">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Weapons</div>
+                        <h3>Fantasy Weapons Pack</h3>
+                        <p>Collection of 50+ high-quality fantasy weapons with unique designs and effects.</p>
+                        <div class="product-meta">
+                            <div class="product-price">$19.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <div class="product-btn cart-btn">Add to Cart</div>
+                            <div class="product-btn details-btn">Details</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519669556878-63bdad8a1a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Character Mod">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Characters</div>
+                        <h3>HD Character Models</h3>
+                        <p>Ultra-realistic character models with 4K textures and advanced animations.</p>
+                        <div class="product-meta">
+                            <div class="product-price">$29.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <div class="product-btn cart-btn">Add to Cart</div>
+                            <div class="product-btn details-btn">Details</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-badge">POPULAR</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1084&q=80" alt="Environment Mod">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Environments</div>
+                        <h3>Fantasy World Bundle</h3>
+                        <p>Complete fantasy environment pack with trees, rocks, buildings, and terrain.</p>
+                        <div class="product-meta">
+                            <div class="product-price">$34.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <div class="product-btn cart-btn">Add to Cart</div>
+                            <div class="product-btn details-btn">Details</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Vehicle Mod">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Vehicles</div>
+                        <h3>Future Vehicles Pack</h3>
+                        <p>Collection of 15 futuristic vehicles with custom animations and effects.</p>
+                        <div class="product-meta">
+                            <div class="product-price">$27.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <div class="product-btn cart-btn">Add to Cart</div>
+                            <div class="product-btn details-btn">Details</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-badge">NEW</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="VR Mod">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">VR Experience</div>
+                        <h3>VR Enhancement Pack</h3>
+                        <p>Complete VR optimization for better immersion and gameplay experience.</p>
+                        <div class="product-meta">
+                            <div class="product-price">$39.99</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <div class="product-btn cart-btn">Add to Cart</div>
+                            <div class="product-btn details-btn">Details</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <div class="page-btn"><i class="fas fa-chevron-left"></i></div>
+                <div class="page-btn active">1</div>
+                <div class="page-btn">2</div>
+                <div class="page-btn">3</div>
+                <div class="page-btn">4</div>
+                <div class="page-btn">5</div>
+                <div class="page-btn"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shadow Mods</h3>
+                    <p>Your premier destination for premium mods and digital content. Quality guaranteed.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Explore</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">New Releases</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new products and special offers.</p>
+                    <form>
+                        <input type="email" placeholder="Your email address" style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 2px solid var(--primary); background: rgba(255,255,255,0.5); color: var(--dark);">
+                        <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Shadow Mods. All rights reserved.</p>
+                <p class="designer-credit">Designed by Abhinit Kumar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced 3D animations and effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const productCards = document.querySelectorAll('.product-card');
+            const filterTags = document.querySelectorAll('.filter-tag');
+            const viewBtns = document.querySelectorAll('.view-btn');
+            const pageBtns = document.querySelectorAll('.page-btn');
+            const shapes = document.querySelectorAll('.floating-shape');
+            
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            productCards.forEach(card => {
+                card.style.opacity = '0';
+                observer.observe(card);
+            });
+            
+            // Filter tags functionality
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Simulate filtering
+                    productCards.forEach(card => {
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 300);
+                    });
+                });
+            });
+            
+            // View buttons functionality
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    viewBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Toggle between grid and list view
+                    const productsGrid = document.querySelector('.products-grid');
+                    if (this.querySelector('i').classList.contains('fa-list')) {
+                        productsGrid.style.gridTemplateColumns = '1fr';
+                        productCards.forEach(card => {
+                            card.style.display = 'flex';
+                            card.style.flexDirection = 'row';
+                            card.querySelector('.product-image').style.width = '30%';
+                            card.querySelector('.product-image').style.height = 'auto';
+                            card.querySelector('.product-info').style.width = '70%';
+                        });
+                    } else {
+                        productsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+                        productCards.forEach(card => {
+                            card.style.display = 'block';
+                            card.querySelector('.product-image').style.width = '100%';
+                            card.querySelector('.product-image').style.height = '200px';
+                            card.querySelector('.product-info').style.width = 'auto';
+                        });
+                    }
+                });
+            });
+            
+            // Pagination functionality
+            pageBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.querySelector('i')) return;
+                    
+                    pageBtns.forEach(b => {
+                        if (!b.querySelector('i')) {
+                            b.classList.remove('active');
+                        }
+                    });
+                    this.classList.add('active');
+                    
+                    // Simulate page change
+                    productCards.forEach(card => {
+                        card.style.opacity = '0';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 300);
+                    });
+                });
+            });
+            
+            // Add to cart functionality
+            const cartButtons = document.querySelectorAll('.cart-btn');
+            let cartCount = 3;
+            
+            cartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-check"></i> Added';
+                    this.style.background = 'linear-gradient(135deg, var(--success), var(--primary))';
+                    
+                    // Update cart count
+                    cartCount++;
+                    document.querySelector('.btn i').nextSibling.textContent = ` Cart (${cartCount})`;
+                    
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        this.innerHTML = 'Add to Cart';
+                        this.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                    }, 2000);
+                });
+            });
+            
+            // Parallax effect for background elements
+            window.addEventListener('mousemove', function(e) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                const bg1 = document.querySelector('.bg-1');
+                const bg2 = document.querySelector('.bg-2');
+                const bg3 = document.querySelector('.bg-3');
+                
+                bg1.style.transform = `translateX(${x * 30}px) translateY(${y * 30}px) translateZ(0)`;
+                bg2.style.transform = `translateX(${-x * 40}px) translateY(${-y * 40}px) translateZ(0)`;
+                bg3.style.transform = `translateX(${x * 50}px) translateY(${y * 50}px) translateZ(0)`;
+                
+                // Move shapes with mouse
+                shapes.forEach((shape, index) => {
+                    const speed = 0.01 + (index * 0.01);
+                    shape.style.transform = `translateX(${x * 100 * speed}px) translateY(${y * 100 * speed}px) rotate(${x * 100}deg) translateZ(0)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
