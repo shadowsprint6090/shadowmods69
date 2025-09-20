@@ -858,7 +858,6 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Shop</a></li>
-                    <li><a href="Cart.html">Cart</a></li>
                     <li><a href="#">Categories</a></li>
                     <li><a href="#">Best Sellers</a></li>
                     <li><a href="#">Support</a></li>
@@ -870,19 +869,19 @@
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Search mods...">
                 </div>
-                <a href="Cart.html" class="btn"><i class="fas fa-shopping-cart"></i> Cart (0)</a>    
+                <a href="#" class="btn"><i class="fas fa-shopping-cart"></i> Cart (0)</a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section -->    
     <section class="hero">
         <div class="container hero-content">
             <div class="hero-text">
                 <h1>Elevate Your Experience with <span>Shadow Mods</span></h1>
                 <p>Discover the ultimate collection of premium mods and digital content. Transform your gameplay with our expertly crafted modifications.</p>
                 <div class="hero-buttons">
-                    <a href="Explore shop.html" class="btn">Explore Shop</a>
+                    <a href="Explore shop.html" class="btn">Explore shop</a>
                     <a href="Learn more.html" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
@@ -1136,11 +1135,318 @@
             });
         });
     </script>
+
+    <!-- Shadow Buddy Chatbot START -->
+    <div id="sb-fab" class="sb-fab" aria-label="Open chat" role="button" tabindex="0" title="Chat with Shadow Buddy">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 5.5a2.5 2.5 0 0 1 2.5-2.5h11A2.5 2.5 0 0 1 20 5.5v7A2.5 2.5 0 0 1 17.5 15H12l-4.5 3v-3H6.5A2.5 2.5 0 0 1 4 12.5v-7z" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity=".95"/>
+      </svg>
+    </div>
+
+    <div id="sb-panel" class="sb-panel" aria-live="polite" aria-label="Shadow Buddy chat">
+      <div class="sb-head">
+        <div class="left">
+          <span class="sb-logo"><i class="fas fa-cube"></i></span>
+          <div>
+            <b>Shadow Buddy</b>
+            <small>Hindi + English • Friendly & Funny</small>
+          </div>
+        </div>
+        <button id="sb-close" class="sb-icon" aria-label="Close chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="sb-msgs" class="sb-msgs"></div>
+
+      <div class="sb-input">
+        <textarea id="sb-text" rows="1" placeholder="Type in English or Hindi… (e.g., 'kaise ho?' or 'tell me a joke')"></textarea>
+        <button id="sb-send" class="sb-send" aria-label="Send">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 12l16-7-7 16-2-7-7-2z" stroke="white" stroke-width="2" stroke-linejoin="round" opacity=".9"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <style>
+      :root{
+        --sb-accent: var(--accent, #f72585);
+        --sb-primary: var(--primary, #4361ee);
+        --sb-bg: rgba(12,14,22,0.94);
+        --sb-card: rgba(255,255,255,0.06);
+        --sb-border: rgba(255,255,255,0.14);
+        --sb-text: #eaf0ff;
+        --sb-muted:#b6c2e2;
+      }
+      .sb-fab{
+        position: fixed; right: 22px; bottom: 22px; z-index: 9999;
+        width: 58px; height: 58px; display:grid; place-items:center; cursor:pointer;
+        background: linear-gradient(135deg, var(--sb-accent), var(--sb-primary));
+        border-radius: 16px; box-shadow: 0 18px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08) inset;
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+      .sb-fab:hover{ transform: translateY(-2px); box-shadow: 0 24px 50px rgba(0,0,0,.55) }
+      .sb-panel{
+        position: fixed; right: 20px; bottom: 20px; z-index: 9999;
+        width: 340px; max-width: calc(100vw - 40px); height: 520px;
+        display:flex; flex-direction:column; border-radius: 18px; overflow:hidden;
+        backdrop-filter: blur(10px) saturate(120%);
+        background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)), var(--sb-bg);
+        border:1px solid var(--sb-border);
+        box-shadow: 0 25px 80px rgba(0,0,0,.6);
+        opacity:0; transform: translateY(10px) scale(.98); pointer-events:none; transition: all .25s ease;
+      }
+      .sb-panel.sb-open{ opacity:1; transform: translateY(0) scale(1); pointer-events:auto }
+      .sb-head{
+        padding:12px 12px; border-bottom:1px solid var(--sb-border);
+        display:flex; align-items:center; justify-content:space-between; gap:8px;
+        background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      }
+      .sb-head .left{ display:flex; align-items:center; gap:10px }
+      .sb-logo{ width:28px; height:28px; border-radius:8px; display:grid; place-items:center;
+        background: linear-gradient(135deg, var(--sb-accent), var(--sb-primary)); color:#0b0e16;
+        box-shadow: 0 8px 20px rgba(0,0,0,.35);
+      }
+      .sb-logo i{ color: #fff }
+      .sb-head b{ color:var(--sb-text); letter-spacing:.3px }
+      .sb-head small{ display:block; color:var(--sb-muted); margin-top:2px }
+
+      .sb-icon{
+        background: transparent; border: 1px solid var(--sb-border); color: var(--sb-text);
+        width:34px; height:34px; display:grid; place-items:center; border-radius:10px; cursor:pointer;
+      }
+
+      .sb-msgs{
+        flex:1; overflow:auto; padding:14px 12px; display:flex; flex-direction:column; gap:10px;
+        scroll-behavior:smooth; background:
+          radial-gradient(260px 160px at 85% 0%, rgba(124,110,255,.15), transparent 60%),
+          radial-gradient(300px 200px at 10% 100%, rgba(0,225,255,.10), transparent 60%);
+      }
+      .sb-row{ display:flex; align-items:flex-end; gap:8px }
+      .sb-row.user{ justify-content:flex-end }
+      .sb-bubble{
+        max-width: 78%; padding:10px 12px; border-radius:14px; line-height:1.35; color:var(--sb-text);
+        border:1px solid var(--sb-border);
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+        box-shadow: 0 6px 20px rgba(0,0,0,.35);
+        white-space: pre-wrap; word-break: break-word;
+      }
+      .sb-row.user .sb-bubble{
+        background: linear-gradient(135deg, var(--sb-accent), var(--sb-primary));
+        color:#0b0e16; border: none; font-weight:700;
+      }
+      .sb-typing{ display:inline-flex; gap:4px; align-items:center }
+      .sb-typing i{
+        width:6px; height:6px; border-radius:50%; background:var(--sb-muted); opacity:.8; animation: sbblink 1.4s infinite;
+      }
+      .sb-typing i:nth-child(2){ animation-delay:.2s } .sb-typing i:nth-child(3){ animation-delay:.4s }
+      @keyframes sbblink{ 0%,100%{transform:translateY(0); opacity:.5} 50%{transform:translateY(-3px); opacity:1} }
+
+      .sb-input{ display:flex; gap:10px; padding:10px; border-top:1px solid var(--sb-border); }
+      .sb-input textarea{
+        flex:1; resize:none; border:1px solid var(--sb-border); border-radius:12px; padding:10px 12px;
+        background: rgba(255,255,255,.04); color:var(--sb-text); outline:none; max-height:120px;
+      }
+      .sb-send{
+        width:42px; border-radius:12px; border:none; cursor:pointer; color:#0b0e16;
+        background: linear-gradient(135deg, var(--sb-accent), var(--sb-primary));
+        box-shadow: 0 12px 28px rgba(124,110,255,.35);
+      }
+      @media (max-width: 420px) {
+        .sb-panel{ right:10px; left:10px; width:auto; height:70vh }
+      }
+    </style>
+
+    <script>
+    (() => {
+      const el = {
+        fab: document.getElementById('sb-fab'),
+        panel: document.getElementById('sb-panel'),
+        close: document.getElementById('sb-close'),
+        msgs: document.getElementById('sb-msgs'),
+        text: document.getElementById('sb-text'),
+        send: document.getElementById('sb-send'),
+      };
+
+      const state = {
+        name: localStorage.getItem('sb-name') || null,
+        greeted: false,
+      };
+
+      function openPanel() {
+        el.panel.classList.add('sb-open');
+        if (!state.greeted) {
+          state.greeted = true;
+          setTimeout(() => {
+            botSay("Namaste! I’m Shadow Buddy — tumhara gamer dost 😎\nHindi aur English dono chalta hai. Bol, kya scene hai?");
+            if (!state.name) botSay("Waise tumhara naam? (Say: “Mera naam <name> hai” or “My name is <name>”.)");
+          }, 120);
+        }
+      }
+      function closePanel() { el.panel.classList.remove('sb-open'); }
+
+      // UI helpers
+      function scrollDown() { el.msgs.scrollTop = el.msgs.scrollHeight; }
+      function row(type, html) {
+        const r = document.createElement('div');
+        r.className = 'sb-row ' + type;
+        const b = document.createElement('div');
+        b.className = 'sb-bubble';
+        b.innerHTML = html;
+        r.appendChild(b);
+        return r;
+      }
+      function userSay(text) {
+        el.msgs.appendChild(row('user', escapeHTML(text)));
+        scrollDown();
+      }
+      function botSay(text, delay=350) {
+        const typing = row('bot', `<span class="sb-typing"><i></i><i></i><i></i></span>`);
+        el.msgs.appendChild(typing); scrollDown();
+        setTimeout(() => {
+          typing.remove();
+          el.msgs.appendChild(row('bot', linkify(escapeHTML(text))));
+          scrollDown();
+        }, delay + 250 + Math.min(1200, Math.max(250, text.length * 12)));
+      }
+
+      // Utils
+      function escapeHTML(s){ return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])) }
+      function linkify(s){
+        return s.replace(/(https?:\/\/[^\s)]+)|(#[a-zA-Z0-9_-]+)/g, m => {
+          if (m.startsWith('#')) return `<a href="${m}" style="color:#9ecbff;text-decoration:none">${m}</a>`;
+          return `<a href="${m}" target="_blank" style="color:#9ecbff;text-decoration:none">${m}</a>`;
+        });
+      }
+      function detectLang(t){
+        if (/[\u0900-\u097F]/.test(t)) return 'hi';
+        if (/\b(kya|kaise|hai|nahi|haan|acha|sahi|mast|bhai|dost|tum|aap|kar|raha|hun|mera|naam)\b/i.test(t)) return 'hi';
+        return 'en';
+      }
+      function capName(str){
+        return str ? str.replace(/\s+/g,' ').trim().split(' ').map(s => s[0].toUpperCase()+s.slice(1)).join(' ') : '';
+      }
+      const jokesEn = [
+        "Why do developers love dark mode? Because light attracts bugs.",
+        "I tried to write a mod about time travel… but you guys didn’t like it yet.",
+        "I told my GPU a joke. It didn’t laugh — it just clocked out.",
+        "I would tell a UDP joke, but you might not get it.",
+      ];
+      const jokesHi = [
+        "Developer dark mode kyun pasand karte? Kyunki light bugs ko attract karti hai 😜",
+        "Maine time-travel pe mod banaya… par tum log ne abhi tak pasand nahi kiya (future me karoge).",
+        "GPU ko joke sunaya — hasi nahi, bas overclock ho gaya!",
+        "Ek UDP joke sunu? Chhodo, mil bhi na paye tum tak 😅",
+      ];
+      function random(arr){ return arr[Math.floor(Math.random()*arr.length)] }
+
+      function handleMessage(raw){
+        const text = raw.trim();
+        if (!text) return;
+        userSay(text);
+        el.text.value = '';
+        el.text.style.height = 'auto';
+
+        const lang = detectLang(text);
+        const lc = text.toLowerCase();
+
+        // Name capture
+        let m = lc.match(/\b(?:my name is|i am|i'm)\s+([a-z\u0900-\u097F][^\d,.;!?]*)/i);
+        let mh = lc.match(/\bmera(?:\s+|-)naam\s+([a-z\u0900-\u097F][^\d,.;!?]*)\s*(?:hai|hun|hu|hon)?/i);
+        const nameFound = capName((mh?.[1] || m?.[1] || '').replace(/[^a-z\u0900-\u097F\s-]/gi,''));
+        if (nameFound && nameFound.length < 32){
+          state.name = nameFound; localStorage.setItem('sb-name', state.name);
+          botSay(lang==='hi'
+            ? `Mast, ${state.name}! Ab main yaad rakhunga. Aaj kya khelne ka mood hai?`
+            : `Nice, ${state.name}! I’ll remember that. What are we playing today?`);
+          return;
+        }
+
+        // Greetings
+        if (/\b(hi|hello|hey|yo|namaste|namaskar|pranam|salam)\b/i.test(lc)){
+          botSay(lang==='hi'
+            ? `Hello hello! ${state.name ? state.name + ', ' : ''}kaisa chal raha hai? Ek joke sunu ya koi mod dhoondun?`
+            : `Hey${state.name ? ' ' + state.name : ''}! How’s it going? Want a joke or should I find a mod for you?`);
+          return;
+        }
+
+        // How are you
+        if (/\b(how are you|kaise ho|kya haal|kese ho)\b/i.test(lc)){
+          botSay(lang==='hi'
+            ? `Main badiya hoon! Tum batao — gaming ka kya scene? 🎮`
+            : `I’m doing great! What’s your gaming plan today? 🎮`);
+          return;
+        }
+
+        // Jokes
+        if (/\b(joke|funny|meme|hasa|hassi|majak|mazaak|chutkula)\b/i.test(lc) || lc === '/joke'){
+          botSay(lang==='hi' ? random(jokesHi) : random(jokesEn));
+          return;
+        }
+
+        // Mods / downloads
+        if (/\b(mod|mods|download|link|install|shader|skin|ui|overhaul)\b/i.test(lc)){
+          const tipsHi = `Mods chahiye? Featured section me dekh lo ya mujhe mod ka naam bolo (jaise “Cyberpunk UI”).`;
+          const tipsEn = `Looking for mods? Check Featured or tell me a name (like “Cyberpunk UI”).`;
+          botSay(lang==='hi' ? tipsHi : tipsEn);
+          return;
+        }
+
+        // Pricing / plans keywords
+        if (/\b(price|pricing|plan|membership|kitna|cost|platinum|gold|diamond)\b/i.test(lc)){
+          botSay(lang==='hi'
+            ? `Plans dekhne ke liye pricing page add karoge to main wahan le jaunga. Abhi ke liye batao kis type ka mod chahiye?`
+            : `Once you add a pricing page, I’ll link you there. For now, tell me what kind of mod you want.`);
+          return;
+        }
+
+        // Help
+        if (/\b(help|support|problem|issue|madad)\b/i.test(lc)){
+          botSay(lang==='hi'
+            ? `Koi dikkat? Yahin pucho — main saath hoon.`
+            : `Got an issue? Ask me here — I’m with you.`);
+          return;
+        }
+
+        // Thanks
+        if (/\b(thanks|thank you|shukriya|dhanyavad)\b/i.test(lc)){
+          botSay(lang==='hi' ? `Kabhi bhi! 😄` : `Anytime! 😄`);
+          return;
+        }
+
+        // Bye
+        if (/\b(bye|goodbye|good night|gn|milte|chalte)\b/i.test(lc)){
+          botSay(lang==='hi' ? `Bye! Jaldi wapas aana, ${state.name || 'dost'} 👋` : `Bye! Come back soon, ${state.name || 'friend'} 👋`);
+          return;
+        }
+
+        // Default
+        botSay(lang==='hi'
+          ? `Samjha! Thoda aur detail do — kis game/mod style me interest hai? (Tip: “/joke” likh ke dekh) 😉`
+          : `Got it! Give me a bit more detail — which game or mod style? (Tip: try “/joke”) 😉`);
+      }
+
+      // Events
+      el.fab.addEventListener('click', openPanel);
+      el.fab.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openPanel(); });
+      el.close.addEventListener('click', closePanel);
+      el.send.addEventListener('click', () => handleMessage(el.text.value));
+      el.text.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleMessage(el.text.value);
+        }
+      });
+      el.text.addEventListener('input', () => {
+        el.text.style.height = 'auto';
+        el.text.style.height = Math.min(120, el.text.scrollHeight) + 'px';
+      });
+    })();
+    </script>
+    <!-- Shadow Buddy Chatbot END -->
+
 </body>
-
 </html>
-
-
-
-
-
